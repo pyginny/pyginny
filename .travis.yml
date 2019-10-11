@@ -1,0 +1,28 @@
+language: python
+
+# python versions
+matrix:
+  include:
+    - python: "2.7"
+    - python: "3.3"
+    - python: "3.4"
+    - python: "3.5"
+    - python: "3.6"
+    - python: "3.7"
+      dist: xenial
+      sudo: true
+
+# command to install dependencies
+install:
+  - make deps
+  - pip install coveralls
+  - make install
+
+# command to run tests
+script:
+  - make test-cov
+  - make sample
+
+# run after success
+after_success:
+  - coveralls

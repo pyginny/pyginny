@@ -1,0 +1,19 @@
+package {{ options["--java-package"] }};
+
+class {{record.name|capitalize}} {
+
+    {% for field in record.fields %}
+    protected {{field.type|javatype}} {{field.name}};
+    {% endfor %}
+
+    {% for field in record.fields %}
+    public {{field.type|javatype}} get{{field.name|capitalize}}() {
+        return this.{{field.name}};
+    }
+
+    public void set{{field.name|capitalize}}({{field.type|javatype}} newValue) {
+        this.{{field.name}} = newValue;
+    }
+
+    {% endfor %}
+}

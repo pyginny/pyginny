@@ -1,0 +1,29 @@
+customer = record {
+    id: i64;
+    name: string;
+    age: i8;
+    working: bool;
+    weight: f32;
+    height: f64;
+    photo: binary;
+    birth_date: date;
+    number_of_houses: i16;
+    number_of_cars: i32;
+    number_of_sons: i64;
+    list_string: list<string>;
+    list_i8: list<i8>;
+    list_i16: list<i16>;
+    list_i32: list<i32>;
+    list_i64: list<i64>;
+    list_f32: list<f32>;
+    list_f64: list<f64>;
+    list_binary: list<binary>;
+    list_date: list<date>;
+    address_list: list<customer_address>;
+    address_set: set<customer_address>;
+} deriving (eq, parcelable)
+
+customer_address = record {
+    id: i64;
+    address: string;
+}

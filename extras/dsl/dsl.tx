@@ -1,0 +1,21 @@
+RecordModel:
+   records+=Record
+;
+
+Record:
+   name=ID '=' 'record' (flags*=Flag)? '{'
+   fields+=RecordField
+'}'
+('deriving' '(' derivings*=Deriving[','] ')')? // Optional deriving
+;
+
+Flag: '+' name=ID; // Flag has "name"
+Deriving: name=ID; // Deriving has "name"
+RecordField: name=ID ':' type=Type ';';  // RecordField has "name" and "type"
+Type: ComplexType | SimpleType;  // Type can be simple or complex
+SimpleType: name=ID; // Can be any string that will be check by code because can be filled from external sources
+ComplexType: OptionalType | ContainerType;
+OptionalType: 'optional<' inner_type=SimpleType '>';
+ContainerType: kind=ContainerKind  '<' inner_type=Type '>';
+ContainerKind: 'list' | 'set' | 'map';
+Comment: /\/\/.*/;
